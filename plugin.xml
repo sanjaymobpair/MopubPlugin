@@ -1,95 +1,111 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<plugin xmlns="http://apache.org/cordova/ns/plugins/1.0"
-  xmlns:android="http://schemas.android.com/apk/res/android"
-  id="cordova-plugin-mopub"
-  version="1.0.0">
-      
-  <name>MoPub</name>
-  <description>Cordova/PhoneGap Plugin for MoPub Ads</description>
-  <author>Liming Xie</author>
-  <license>MIT</license>
-  <keywords>rjfun,ad,mopub</keywords>
-  <repo>https://github.com/floatinghotpot/cordova-plugin-mopub.git</repo>
-  <issue>https://github.com/floatinghotpot/cordova-plugin-mopub/issues</issue>
+<plugin xmlns:android="http://schemas.android.com/apk/res/android" id="cordova-plugin-mopub"
+    version="1.0.0" xmlns="http://apache.org/cordova/ns/plugins/1.0">
 
-  <engines>
-    <engine name="cordova" version=">=3.5" />
-  </engines>
+    <name>MoPub</name>
+    <description>Cordova/PhoneGap Plugin for MoPub Ads</description>
+    <author>Liming Xie</author>
+    <license>MIT</license>
+    <keywords>rjfun,ad,mopub</keywords>
+    <repo>https://github.com/floatinghotpot/cordova-plugin-mopub.git</repo>
+    <issue>https://github.com/floatinghotpot/cordova-plugin-mopub/issues</issue>
 
-  <js-module src="www/MoPub.js" name="MoPub">
-    <clobbers target="window.MoPub" />
-  </js-module>
+    <engines>
+        <engine name="cordova" version=">=3.5" />
+    </engines>
 
-  <dependency id="cordova-plugin-extension"/>
+    <js-module name="MoPub" src="www/MoPub.js">
+        <clobbers target="window.MoPub" />
+    </js-module>
 
-  <!-- android -->
-  <platform name="android">
-    <config-file target="res/xml/config.xml" parent="/*">
-      <feature name="MoPub">
-        <param name="android-package" value="com.rjfun.cordova.mopub.MoPubPlugin"/>
-      </feature>
-    </config-file>
-      <source-file src="src/android/MoPubPlugin.java" target-dir="src/com/rjfun/cordova/mopub" />
+    <dependency id="cordova-plugin-extension" />
 
-      <config-file target="AndroidManifest.xml" parent="/manifest/application">
-        <activity android:name="com.mopub.mobileads.MoPubActivity" android:configChanges="keyboardHidden|orientation|screenSize"/>
-        <activity android:name="com.mopub.mobileads.MraidActivity" android:configChanges="keyboardHidden|orientation|screenSize"/>
-        <activity android:name="com.mopub.common.MoPubBrowser" android:configChanges="keyboardHidden|orientation|screenSize"/>
-        <activity android:name="com.mopub.mobileads.MraidVideoPlayerActivity" android:configChanges="keyboardHidden|orientation|screenSize"/>
-        <activity android:name="com.mopub.mobileads.RewardedMraidActivity" android:configChanges="keyboardHidden|orientation|screenSize"/>
+    <!-- android -->
+    <platform name="android">
+        <config-file parent="/*" target="res/xml/config.xml">
+            <feature name="MoPub">
+                <param name="android-package" value="com.rjfun.cordova.mopub.MoPubPlugin" />
+            </feature>
+        </config-file>
 
-        <meta-data android:name="com.google.android.gms.version" android:value="@integer/google_play_services_version" />
-    </config-file>
+        <source-file src="src/android/MoPubPlugin.java" target-dir="src/com/rjfun/cordova/mopub" />
+        <source-file src="src/android/GamesRecycler.java"
+            target-dir="src/com/rjfun/cordova/mopub" />
+        <source-file src="src/android/ListAdapter.java" target-dir="src/com/rjfun/cordova/mopub" />
+        <source-file src="src/android/MoPubNativeAds.java"
+            target-dir="src/com/rjfun/cordova/mopub" />
 
-      <config-file target="AndroidManifest.xml" parent="/*">
-        <uses-permission android:name="android.permission.INTERNET" />
-        <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
-        <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
-        <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
-        <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
-      </config-file>
+        <config-file parent="/manifest/application" target="AndroidManifest.xml">
+            <activity android:name="com.mopub.mobileads.MoPubActivity"
+                android:configChanges="keyboardHidden|orientation|screenSize" />
+            <activity android:name="com.mopub.mobileads.MraidActivity"
+                android:configChanges="keyboardHidden|orientation|screenSize" />
+            <activity android:name="com.mopub.common.MoPubBrowser"
+                android:configChanges="keyboardHidden|orientation|screenSize" />
+            <activity android:name="com.mopub.mobileads.MraidVideoPlayerActivity"
+                android:configChanges="keyboardHidden|orientation|screenSize" />
+            <activity android:name="com.mopub.mobileads.RewardedMraidActivity"
+                android:configChanges="keyboardHidden|orientation|screenSize" />
+            <activity android:name="com.rjfun.cordova.mopub.GamesRecycler"
+                android:configChanges="keyboardHidden|orientation|screenSize" />
 
-      <framework src="src/android/plugin.gradle" custom="true" type="gradleReference"/>
-      <framework src="com.mopub:mopub-sdk:+" />
-      <framework src="com.mopub.volley:mopub-volley:+" />
+            <meta-data android:name="com.google.android.gms.version"
+                android:value="@integer/google_play_services_version" />
 
-      <framework src="com.google.android.gms:play-services-ads:+" />
-      <framework src="com.android.support:support-v4:+" />
-      <framework src="com.android.support:recyclerview-v7:+" />
+            <meta-data
+                android:name="com.google.android.gms.ads.AD_MANAGER_APP"
+                android:value="true" />
+        </config-file>
 
-  </platform>
-     
-  <!-- ios -->
-  <platform name="ios">
-    <config-file target="config.xml" parent="/*">
-      <feature name="MoPub">
-        <param name="ios-package" value="MoPubPlugin" />
-      </feature>
-    </config-file>
+        <config-file parent="/*" target="AndroidManifest.xml">
+            <uses-permission android:name="android.permission.INTERNET" />
+            <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+            <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+            <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+            <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+        </config-file>
 
-    <header-file src="src/ios/MoPubPlugin.h"/>
-    <source-file src="src/ios/MoPubPlugin.m"/>
+        <framework custom="true" src="src/android/plugin.gradle" type="gradleReference" />
+        <framework src="com.mopub:mopub-sdk:+" />
+        <framework src="com.mopub.volley:mopub-volley:+" />
 
-    <framework src="AdSupport.framework"/>
-    <framework src="CoreGraphics.framework"/>
-    <framework src="CoreLocation.framework"/>
-    <framework src="CoreMedia.framework"/>
-    <framework src="CoreTelephony.framework"/>
-    <framework src="EventKit.framework"/>
-    <framework src="EventKitUI.framework"/>
-    <framework src="Foundation.framework"/>
-    <framework src="MediaPlayer.framework"/>
-    <framework src="MessageUI.framework"/>
-    <framework src="QuartzCore.framework"/>
-    <framework src="StoreKit.framework"/>
-    <framework src="SystemConfiguration.framework"/>
-    <framework src="UIKit.framework"/>
-    <framework src="WebKit.framework"/>
+        <framework src="com.google.android.gms:play-services-ads:+" />
+        <framework src="com.android.support:support-v4:+" />
+        <framework src="com.android.support:recyclerview-v7:+" />
 
-    <!-- required cordova 6.4.0 or higher -->
-    <framework src="mopub-ios-sdk" type="podspec" spec="~> 4.12.0"/>
+    </platform>
 
-  </platform>
+    <!-- ios -->
+    <platform name="ios">
+        <config-file parent="/*" target="config.xml">
+            <feature name="MoPub">
+                <param name="ios-package" value="MoPubPlugin" />
+            </feature>
+        </config-file>
+
+        <header-file src="src/ios/MoPubPlugin.h" />
+        <source-file src="src/ios/MoPubPlugin.m" />
+
+        <framework src="AdSupport.framework" />
+        <framework src="CoreGraphics.framework" />
+        <framework src="CoreLocation.framework" />
+        <framework src="CoreMedia.framework" />
+        <framework src="CoreTelephony.framework" />
+        <framework src="EventKit.framework" />
+        <framework src="EventKitUI.framework" />
+        <framework src="Foundation.framework" />
+        <framework src="MediaPlayer.framework" />
+        <framework src="MessageUI.framework" />
+        <framework src="QuartzCore.framework" />
+        <framework src="StoreKit.framework" />
+        <framework src="SystemConfiguration.framework" />
+        <framework src="UIKit.framework" />
+        <framework src="WebKit.framework" />
+
+        <!-- required cordova 6.4.0 or higher -->
+        <framework spec="~> 4.12.0" src="mopub-ios-sdk" type="podspec" />
+
+    </platform>
 
 </plugin>

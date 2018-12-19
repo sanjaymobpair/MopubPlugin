@@ -115,7 +115,7 @@ public class MoPubPlugin extends GenericAdPlugin {
 	protected void __pauseAdView(View view) {
 		if(view instanceof MoPubView) {
 			MoPubView ad = (MoPubView)view;
-			// ad.pause();
+			ad.setAutorefreshEnabled(false);
 		}
 	}
 
@@ -123,7 +123,7 @@ public class MoPubPlugin extends GenericAdPlugin {
 	protected void __resumeAdView(View view) {
 		if(view instanceof MoPubView) {
 			MoPubView ad = (MoPubView)view;
-			// ad.resume();
+			ad.setAutorefreshEnabled(true);
 		}
 	}
 
