@@ -9,7 +9,6 @@ import android.util.Log;
 import com.mopub.nativeads.MoPubRecyclerAdapter;
 import com.mopub.nativeads.MoPubStaticNativeAdRenderer;
 import com.mopub.nativeads.ViewBinder;
-import com.tv.giantporker.R;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -48,6 +47,7 @@ public class GamesRecycler extends Activity {
         ViewBinder viewBinder = new ViewBinder.Builder(R.layout.nativeadsxml)
                 .iconImageId(R.id.native_icon_image)
                 .titleId(R.id.native_title)
+                .mainImageId(R.id.native_main_image_id)
                 .privacyInformationIconImageId(R.id.native_privacy_information_icon_image)
                 .build();
 
