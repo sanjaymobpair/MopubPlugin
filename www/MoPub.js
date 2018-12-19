@@ -105,5 +105,10 @@ mopubExport.showInterstitial = function(successCallback, failureCallback) {
 	cordova.exec( successCallback, failureCallback, 'MoPub', 'showInterstitial', [] );
 };
 
+mopubExport.__showNativeAds = function(args,successCallback, failureCallback) {
+    console.log('prepare native....');
+    cordova.exec( successCallback, failureCallback, 'MoPubNativeAds', '__showNativeAds', [args] );
+};
+
 module.exports = mopubExport;
 
