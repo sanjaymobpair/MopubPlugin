@@ -8,8 +8,6 @@
     <author>Liming Xie</author>
     <license>MIT</license>
     <keywords>rjfun,ad,mopub</keywords>
-    <repo>https://github.com/floatinghotpot/cordova-plugin-mopub.git</repo>
-    <issue>https://github.com/floatinghotpot/cordova-plugin-mopub/issues</issue>
 
     <engines>
         <engine name="cordova" version=">=3.5" />
@@ -28,6 +26,9 @@
                 <param name="android-package" value="com.rjfun.cordova.mopub.MoPubPlugin" />
             </feature>
         </config-file>
+        <source-file src="src/android/res/layout/activity_games_recycler.xml" target-dir="res/layout" />
+        <source-file src="src/android/res/layout/gamelist.xml" target-dir="res/layout" />
+        <source-file src="src/android/res/layout/nativeadsxml.xml" target-dir="res/layout" />
 
         <source-file src="src/android/MoPubPlugin.java" target-dir="src/com/rjfun/cordova/mopub" />
         <source-file src="src/android/GamesRecycler.java"
