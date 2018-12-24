@@ -8,10 +8,7 @@
     <author>Liming Xie</author>
     <license>MIT</license>
     <keywords>rjfun,ad,mopub</keywords>
-    <repo>https://github.com/floatinghotpot/cordova-plugin-mopub.git</repo>
-    <issue>https://github.com/floatinghotpot/cordova-plugin-mopub/issues</issue>
-
-    <engines>
+  <engines>
         <engine name="cordova" version=">=3.5" />
     </engines>
 
@@ -31,13 +28,15 @@
         <source-file src="src/android/res/layout/activity_games_recycler.xml" target-dir="res/layout" />
         <source-file src="src/android/res/layout/gamelist.xml" target-dir="res/layout" />
         <source-file src="src/android/res/layout/nativeadsxml.xml" target-dir="res/layout" />
-
+        <source-file src="src/android/res/drawable/shaddowback.xml" target-dir="res/drawable" />
+        <source-file src="src/android/res/values/color.xml" target-dir="res/color" />
         <source-file src="src/android/MoPubPlugin.java" target-dir="src/com/rjfun/cordova/mopub" />
         <source-file src="src/android/GamesRecycler.java"
             target-dir="src/com/rjfun/cordova/mopub" />
-        <source-file src="src/android/ListAdapter.java" target-dir="src/com/rjfun/cordova/mopub" />
+        <source-file src="src/android/GamesListAdapter.java" target-dir="src/com/rjfun/cordova/mopub" />
         <source-file src="src/android/MoPubNativeAds.java"
             target-dir="src/com/rjfun/cordova/mopub" />
+        <source-file src="src/android/GameListGetterSetter.java" target-dir="src/com/rjfun/cordova/mopub" />
 
         <config-file parent="/manifest/application" target="AndroidManifest.xml">
             <activity android:name="com.mopub.mobileads.MoPubActivity"
@@ -70,13 +69,13 @@
         </config-file>
 
         <framework custom="true" src="src/android/plugin.gradle" type="gradleReference" />
-        <framework src="com.mopub:mopub-sdk:+" />
-        <framework src="com.mopub.volley:mopub-volley:+" />
+        <framework src="com.mopub:mopub-sdk:5.4.1" />
+        <framework src="com.mopub.volley:mopub-volley:2.0.0" />
 
-        <framework src="com.google.android.gms:play-services-ads:+" />
-        <framework src="com.android.support:support-v4:+" />
-        <framework src="com.android.support:recyclerview-v7:+" />
-
+        <framework src="com.google.android.gms:play-services-ads:17.1.2" />
+        <framework src="com.android.support:support-v4:28.0.0" />
+        <framework src="com.android.support:recyclerview-v7:28.0.0" />
+        <framework src="com.squareup.picasso:picasso:2.5.2"/>
     </platform>
 
     <!-- ios -->
