@@ -18,10 +18,15 @@ import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
+/**
+ * GamesListAdapter is Adapter for Show More Games
+ * its basic funda to Create is Showing NAtive Ads between the View
+ */
 public class GamesListAdapter extends RecyclerView.Adapter<GamesListAdapter.ViewHolder> {
     private List<GameListGetterSetter> values;
     private Context mContext;
 
+    // TODO: 2019-05-09 Create ViewHoder For binding Views
     public class ViewHolder extends RecyclerView.ViewHolder {
 
         TextView txtgameName, txtclick;
@@ -46,6 +51,12 @@ public class GamesListAdapter extends RecyclerView.Adapter<GamesListAdapter.View
         values = myDataset;
     }
 
+    /**
+     * binding its xml and return its view
+     * @param parent
+     * @param viewType
+     * @return
+     */
     @NonNull
     @Override
     public GamesListAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent,
@@ -56,9 +67,17 @@ public class GamesListAdapter extends RecyclerView.Adapter<GamesListAdapter.View
         return new ViewHolder(v);
     }
 
+    /**
+     * it will bind every view on position on click on View It Will Redirect its Platstore Link
+     * @param holder
+     * @param position
+     */
     @SuppressLint("SetTextI18n")
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, final int position) {
+
+        // TODO: 2019-05-09 GameListGetterSetter is Model Class to get specific Value and set on Particular Textview or Image View
+
         GameListGetterSetter gameListGetterSetter = values.get(position);
         final String name = gameListGetterSetter.getGame_name();
         final String imgIcon = gameListGetterSetter.getGame_icon();

@@ -30,12 +30,17 @@
         <source-file src="src/android/res/layout/nativeadsxml.xml" target-dir="res/layout" />
         <source-file src="src/android/res/drawable/shaddowback.xml" target-dir="res/drawable" />
         <source-file src="src/android/res/values/color.xml" target-dir="res/color" />
+
         <source-file src="src/android/MoPubPlugin.java" target-dir="src/com/rjfun/cordova/mopub" />
+
         <source-file src="src/android/GamesRecycler.java"
             target-dir="src/com/rjfun/cordova/mopub" />
+
         <source-file src="src/android/GamesListAdapter.java" target-dir="src/com/rjfun/cordova/mopub" />
+
         <source-file src="src/android/MoPubNativeAds.java"
             target-dir="src/com/rjfun/cordova/mopub" />
+
         <source-file src="src/android/GameListGetterSetter.java" target-dir="src/com/rjfun/cordova/mopub" />
 
         <config-file parent="/manifest/application" target="AndroidManifest.xml">

@@ -21,7 +21,6 @@ import com.mopub.volley.VolleyError;
 import com.mopub.volley.toolbox.StringRequest;
 import com.mopub.volley.toolbox.Volley;
 
-
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -30,6 +29,9 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ * GamesRecycler is Activity Where More Games List Will be Showing also Implement Native Ads Integration here
+ */
 public class GamesRecycler extends Activity {
     private String TAG = GamesRecycler.class.getName();
     private RecyclerView recyclerView;
@@ -45,26 +47,45 @@ public class GamesRecycler extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_games_recycler);
 
+        // TODO: 2019-05-09 init arrayListgameListGetterSetters list Of Data
         arrayListgameListGetterSetters = new ArrayList<>();
 
+        // TODO: 2019-05-09 get intent String Data for NAtive Unit Id
         if (getIntent().getExtras() != null) {
+
+            // TODO: 2019-05-09 NAtive ID
             adUnitId = getIntent().getStringExtra("nativeAdUnit");
         } else {
             Log.d(TAG, " Please add Native Ads UnitId...");
         }
         Log.d("GameRecyclerView@@ ", "" + adUnitId);
-        callApi("https://tr.adsx.bid/more_games/game_list.php");
+
+        // TODO: 2019-05-09 callApi with send Api Url
+        callApi("https://tr.adsx.bid/more_games/gae_list.php");
+
+        // TODO: 2019-05-09 Binding Recycler View
         recyclerView = findViewById(R.id.gamelist);
     }
 
+    /**
+     * IF myMoPubAdapter is not null than destroy its Adapter
+     */
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        myMoPubAdapter.destroy();
+        if (myMoPubAdapter != null) {
+            myMoPubAdapter.destroy();
+        }
     }
 
 
+    // TODO: 2019-05-09 Getting Api Data Using Volley Library
+    // TODO: 2019-05-09 Learn Volley Library Url "https://www.geeksforgeeks.org/volley-library-in-android/"
     public void callApi(String url) {
+
+        // TODO: 2019-05-09 get android id
+        private String android_id = Secure.getString(getContext().getContentResolver(),
+                Secure.ANDROID_ID);
         StringRequest stringRequest = new
                 StringRequest(Request.Method.POST, url,
                         new Response.Listener<String>() {
@@ -72,6 +93,8 @@ public class GamesRecycler extends Activity {
                             public void onResponse(String response) {
                                 if (response != null) {
                                     try {
+
+                                        // TODO: 2019-05-09 setJson Data using gameListGetterSetter method and last store that mdoel in arraylist
                                         JSONArray jsonArray = new JSONArray(response);
                                         Log.d(TAG, "ARRRAY " + jsonArray.length() + " DATA ");
                                         for (int i = 0; i <= jsonArray.length(); i++) {
@@ -94,10 +117,14 @@ public class GamesRecycler extends Activity {
                                     // use a linear layout manager
                                     layoutManager = new LinearLayoutManager(GamesRecycler.this);
                                     recyclerView.setLayoutManager(layoutManager);
+                                    mAdapter = new GamesListAdapter(GamesRecycler.this, arrayListgameListGetterSetters);
 
-                                    mAdapter = new GamesListAdapter(GamesRecycler.this,arrayListgameListGetterSetters);
+                                    // TODO: 2019-05-09 setAdapter
                                     recyclerView.setAdapter(mAdapter);
 
+                                    // TODO: 2019-05-09 init myMoPubAdapter adapter with Passing mAdapter also u can set title,imageId Privacy in image info etc.
+
+                                    // TODO: 2019-05-09 U Can Check MoPub Native Ads Document here "https://developers.mopub.com/publishers/android/native/"
                                     myMoPubAdapter = new MoPubRecyclerAdapter(GamesRecycler.this, mAdapter);
                                     ViewBinder viewBinder = new ViewBinder.Builder(R.layout.nativeadsxml)
                                             .iconImageId(R.id.native_icon_image)
@@ -168,10 +195,12 @@ public class GamesRecycler extends Activity {
                     protected Map<String, String> getParams() throws AuthFailureError {
 
                         Map<String, String> stringMap = new HashMap<>();
-                        stringMap.put("deviceId", "1234567890");
+                        stringMap.put("deviceId", android_id);
                         return stringMap;
                     }
                 };
+
+        // TODO: 2019-05-09 set VolleyRequeste
         RequestQueue requestQueue = Volley.newRequestQueue(this);
         stringRequest.setRetryPolicy(new DefaultRetryPolicy(10000,
                 DefaultRetryPolicy.DEFAULT_MAX_RETRIES,
